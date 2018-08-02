@@ -95,6 +95,11 @@ function detectPoseInRealTime(video, net) {
         drawSkeleton(keypoints, minPartConfidence, ctx);
         if(checkPose(keypoints)){
           msg.textContent = 'バンザーイ！';
+          canvas.toBlob(function(blob) {
+            var img = document.getElementById('capture');
+            img.src = window.URL.createObjectURL(blob);
+          }, 'image/jpeg', 0.95);
+          
         } else {
           msg.textContent = '万歳ポーズしてください';
         }
