@@ -190,6 +190,7 @@ function checkPose(keypoints){
   }
   if(noseY < leftWristY && noseY < rightWristY){
     isHandsUp = true;
+    console.log("noseY: " + noseY + " leftWristY:" + leftWristY + " rightWristY: " + rightWristY);
   }
   return isHandsUp;
 }
