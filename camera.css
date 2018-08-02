@@ -21,3 +21,7 @@ body {
   top: 10%; left: 0;
   max-width: 600px; height: 90%;
 }
+
+#capture {
+  margin-left: 600px;
+}
