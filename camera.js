@@ -1,6 +1,5 @@
-// posenet設定
-const videoWidth = 600;
-const videoHeight = 500;
+const color = 'pink';
+const lineWidth = 2;
 
 function isAndroid() {
   return /Android/i.test(navigator.userAgent);
@@ -22,16 +21,12 @@ async function setupCamera() {
   }
 
   const video = document.getElementById('vid');
-  video.width = videoWidth;
-  video.height = videoHeight;
 
   const mobile = isMobile();
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
       facingMode: 'user',
-      width: mobile ? undefined : videoWidth,
-      height: mobile ? undefined : videoHeight,
     },
   });
   video.srcObject = stream;
@@ -60,9 +55,6 @@ function detectPoseInRealTime(video, net) {
   // since images are being fed from a webcam
   const flipHorizontal = true;
 
-  canvas.width = videoWidth;
-  canvas.height = videoHeight;
-
   async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
@@ -77,12 +69,12 @@ function detectPoseInRealTime(video, net) {
         video, imageScaleFactor, flipHorizontal, outputStride, maxPoseDetections
     );
 
-    ctx.clearRect(0, 0, videoWidth, videoHeight);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.save();
     ctx.scale(-1, 1);
-    ctx.translate(-videoWidth, 0);
-    ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+    ctx.translate(-canvas.width, 0);
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     ctx.restore();
 
     // For each pose (i.e. person) detected in an image, loop through the poses
