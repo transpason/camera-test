@@ -50,12 +50,12 @@ async function loadVideo() {
  * happens. This function loops with a requestAnimationFrame method.
  */
 function detectPoseInRealTime(video, net) {
-  console.log(video.height);
-  console.log(video.width);
-
   const canvas = document.getElementById('cvs');
-  canvas.width = video.width;
-  canvas.height = video.height;
+  console.log(canvas.height);
+  console.log(canvas.width);
+  video.height = canvas.height;
+  video.width = canvas.width;
+  
   const ctx = canvas.getContext('2d');
   // since images are being fed from a webcam
   const flipHorizontal = true;
