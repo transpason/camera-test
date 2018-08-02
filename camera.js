@@ -70,7 +70,7 @@ function detectPoseInRealTime(video, net) {
     const minPoseConfidence = 0.15;
     const minPartConfidence = 0.1;
 
-    let info = document.getElementById('info');
+    let msg = document.getElementById('msg');
     let poses = [];
     poses = await net.estimateMultiplePoses(
         video, imageScaleFactor, flipHorizontal, outputStride, maxPoseDetections
@@ -92,10 +92,9 @@ function detectPoseInRealTime(video, net) {
         drawKeypoints(keypoints, minPartConfidence, ctx);
         drawSkeleton(keypoints, minPartConfidence, ctx);
         if(checkPose(keypoints)){
-          info.textContent = 'Hands Up!';
-          info.style.display = 'block';
+          msg.textContent = 'Hands Up!';
         } else {
-          info.style.display = 'none';
+          msg.textContent = 'Camera';
         }
       }
     });
@@ -188,7 +187,7 @@ function checkPose(keypoints){
       rightWristY = keypoint.position.y;
     }
   }
-  if(noseY < leftWristY && noseY < rightWristY){
+  if(noseY > leftWristY && noseY > rightWristY){
     isHandsUp = true;
     console.log("noseY: " + noseY + " leftWristY:" + leftWristY + " rightWristY: " + rightWristY);
   }
