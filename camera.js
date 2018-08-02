@@ -92,9 +92,9 @@ function detectPoseInRealTime(video, net) {
         drawKeypoints(keypoints, minPartConfidence, ctx);
         drawSkeleton(keypoints, minPartConfidence, ctx);
         if(checkPose(keypoints)){
-          msg.textContent = 'Hands Up!';
+          msg.textContent = 'バンザーイ！';
         } else {
-          msg.textContent = 'Camera';
+          msg.textContent = '万歳ポーズしてください';
         }
       }
     });
