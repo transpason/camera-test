@@ -70,6 +70,7 @@ function detectPoseInRealTime(video, net) {
     const minPoseConfidence = 0.15;
     const minPartConfidence = 0.1;
 
+    let info = document.getElementById('info');
     let poses = [];
     poses = await net.estimateMultiplePoses(
         video, imageScaleFactor, flipHorizontal, outputStride, maxPoseDetections
@@ -90,6 +91,12 @@ function detectPoseInRealTime(video, net) {
       if (score >= minPoseConfidence) {
         drawKeypoints(keypoints, minPartConfidence, ctx);
         drawSkeleton(keypoints, minPartConfidence, ctx);
+        if(checkPose(keypoints)){
+          info.textContent = 'Hands Up!';
+          info.style.display = 'block';
+        } else {
+          info.style.display = 'none';
+        }
       }
     });
 
@@ -163,6 +170,28 @@ function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
 
 function toTuple({y, x}) {
   return [y, x];
+}
+
+function checkPose(keypoints){
+  // 万歳しているときはtrueを返す
+  var noseY = 0;
+  var leftWristY = 0;
+  var rightWristY = 0;
+  var isHandsUp = false;
+  for (let i = 0; i < keypoints.length; i++) {
+    const keypoint = keypoints[i];
+    if(keypoint.part == "nose"){
+      noseY = keypoint.position.y;
+    } else if(keypoint.part == "leftWrist"){
+      leftWristY = keypoint.position.y;
+    } else if(keypoint.part == "rightWrist"){
+      rightWristY = keypoint.position.y;
+    }
+  }
+  if(noseY < leftWristY && noseY < rightWristY){
+    isHandsUp = true;
+  }
+  return isHandsUp;
 }
 
 navigator.getUserMedia = navigator.getUserMedia ||
