@@ -105,7 +105,7 @@ function detectPoseInRealTime(video, net) {
  * Kicks off the demo by loading the posenet model, finding and loading
  * available camera devices, and setting off the detectPoseInRealTime function.
  */
-export async function bindPage() {
+async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   const net = await posenet.load(0.5);
 
