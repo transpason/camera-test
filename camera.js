@@ -1,3 +1,5 @@
+const videoWidth = 600;
+const videoHeight = 500;
 const color = 'pink';
 const lineWidth = 2;
 
@@ -21,6 +23,8 @@ async function setupCamera() {
   }
 
   const video = document.getElementById('vid');
+  video.height = videoHeight;
+  video.width = videoWidth;
 
   const mobile = isMobile();
   const stream = await navigator.mediaDevices.getUserMedia({
@@ -51,11 +55,8 @@ async function loadVideo() {
  */
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('cvs');
-  console.log(canvas.height);
-  console.log(canvas.width);
-  video.height = canvas.height;
-  video.width = canvas.width;
-  
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
   const ctx = canvas.getContext('2d');
   // since images are being fed from a webcam
   const flipHorizontal = true;
