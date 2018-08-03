@@ -31,17 +31,16 @@ async function setupCamera() {
   video.height = videoHeight;
   video.width = videoWidth;
 
-  // const mobile = isMobile();
+  const mobile = isMobile();
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
       facingMode: 'user',
-      width: videoWidth,
-      height: videoHeight,
+      width: mobile ? undefined : videoWidth,
+      height: mobile ? undefined : videoHeight,
     },
   });
   video.srcObject = stream;
-  console.log("video start.");
 
   return new Promise((resolve) => {
     video.onloadedmetadata = () => {
