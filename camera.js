@@ -133,8 +133,9 @@ async function bindPage() {
     video = await loadVideo();
   } catch (e) {
     let info = document.getElementById('info');
-    info.textContent = 'this browser does not support video capture,' +
-        'or this device does not have a camera';
+    // info.textContent = 'this browser does not support video capture,' +
+    //     'or this device does not have a camera';
+    info.textContent = e.name + ' ' + e.massage;
     info.style.display = 'block';
     throw e;
   }
