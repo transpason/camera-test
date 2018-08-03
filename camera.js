@@ -1,6 +1,6 @@
-const videoWidth = 600;
-const videoHeight = 500;
-const color = 'pink';
+const videoWidth = 370;
+const videoHeight = 660;
+const color = 'orange';
 const lineWidth = 2;
 
 function isAndroid() {
@@ -93,15 +93,16 @@ function detectPoseInRealTime(video, net) {
       if (score >= minPoseConfidence) {
         drawKeypoints(keypoints, minPartConfidence, ctx);
         drawSkeleton(keypoints, minPartConfidence, ctx);
+
         if(checkPose(keypoints)){
-          msg.textContent = 'バンザーイ！';
+          msg.textContent = 'Banzai!';
           canvas.toBlob(function(blob) {
             var img = document.getElementById('capture');
             img.src = window.URL.createObjectURL(blob);
           }, 'image/jpeg', 0.95);
           
         } else {
-          msg.textContent = '万歳ポーズしてください';
+          msg.textContent = 'Please hands up.';
         }
       }
     });
