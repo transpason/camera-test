@@ -86,8 +86,8 @@ function detectPoseInRealTime(video, net) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.save();
-    ctx.scale(-1, 1);
-    ctx.translate(-canvas.width, 0);
+    // ctx.scale(-1, 1);  // need only face camera.
+    // ctx.translate(-canvas.width, 0);  // need only face camera.
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     ctx.restore();
 
