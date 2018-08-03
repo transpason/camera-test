@@ -22,11 +22,16 @@ async function setupCamera() {
         'Browser API navigator.mediaDevices.getUserMedia not available');
   }
 
+  navigator.mediaDevices.enumerateDevices()
+    .then(devices => {
+      console.log(JSON.stringify(devices, undefined, 2));
+    });
+
   const video = document.getElementById('vid');
   video.height = videoHeight;
   video.width = videoWidth;
 
-  const mobile = isMobile();
+  // const mobile = isMobile();
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
@@ -36,6 +41,7 @@ async function setupCamera() {
     },
   });
   video.srcObject = stream;
+  console.log("video start.");
 
   return new Promise((resolve) => {
     video.onloadedmetadata = () => {
