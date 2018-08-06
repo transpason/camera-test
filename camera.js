@@ -66,7 +66,7 @@ function detectPoseInRealTime(video, net) {
   canvas.height = videoHeight;
   const ctx = canvas.getContext('2d');
   // since images are being fed from a webcam
-  const flipHorizontal = true;
+  const flipHorizontal = false;
 
   async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
