@@ -26,7 +26,7 @@ div {
     if( navigator.geolocation ){
         msg.textContent = 'YES';
 
-        var opts = {enableHighAccuracy: true, timeout: 5000};
+        var opts = {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000};
         navigator.geolocation.getCurrentPosition(ok, ng, opts);
     } else {
         msg.textContent = 'NO';
@@ -35,11 +35,13 @@ div {
     function ok(pos) {
        loc.textContent = JSON.stringify(pos, undefined, 2);
        console.log("OK");
+       console.log(JSON.stringify(pos, undefined, 2));
     }
 
     function ng(err) {
        loc.textContent = JSON.stringify(err, undefined, 2);
        console.warn("NG");
+       console.warn(JSON.stringify(err, undefined, 2));
     }
 </script>
 </body>
