@@ -35,7 +35,7 @@ async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
-//      facingMode: 'user',
+      facingMode: { exact: "environment" },
       width: mobile ? undefined : videoWidth,
       height: mobile ? undefined : videoHeight,
     },
@@ -66,7 +66,7 @@ function detectPoseInRealTime(video, net) {
   canvas.height = videoHeight;
   const ctx = canvas.getContext('2d');
   // since images are being fed from a webcam
-  const flipHorizontal = true;
+  const flipHorizontal = false;
 
   async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
@@ -86,8 +86,8 @@ function detectPoseInRealTime(video, net) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.save();
-    ctx.scale(-1, 1);
-    ctx.translate(-canvas.width, 0);
+    // ctx.scale(-1, 1);  // need only face camera.
+    // ctx.translate(-canvas.width, 0);  // need only face camera.
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     ctx.restore();
 
