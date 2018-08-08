@@ -50,6 +50,7 @@ div {
     function ng(err) {
        loc.innerHTML = '<table>' +
        '<tr><td>error</td><td>' + err.code + '</td></tr>' +
+       '<tr><td>message</td><td>' + err.message + '</td></tr>' +
        '</table>';
        console.warn("NG");
        console.warn(err);
