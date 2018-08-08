@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <style>
+div {
+  margin: 10px;
+}
+  </style>
+  <title>GPS detection</title>
+</head>
+<body>
+
+<h1>GPS support</h1> 
+<div id="msg">
+</div>
+<h1>Location</h1>
+<div id="loc">
+</div>
+
+<script>
+    var msg = document.getElementById('msg');
+    var loc = document.getElementById('loc');
+
+    // Geolocation APIに対応している
+    if( navigator.geolocation ){
+        msg.textContent = 'YES';
+
+        var opts = {enableHighAccuracy: true, timeout: 5000};
+        navigator.geolocation.getCurrentPosition(ok, ng, opts);
+    } else {
+        msg.textContent = 'NO';
+    }
+
+    function ok(pos) {
+       loc.textContent = JSON.stringify(pos, undefined, 2);
+       console.log("OK");
+    }
+
+    function ng(err) {
+       loc.textContent = JSON.stringify(err, undefined, 2);
+       console.warn("NG");
+    }
+</script>
+</body>
+</html>
