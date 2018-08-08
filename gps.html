@@ -33,15 +33,26 @@ div {
     }
 
     function ok(pos) {
-       loc.textContent = JSON.stringify(pos, undefined, 2);
+       loc.innerHTML = '<table>' +
+       '<tr><td>Coordinates.latitude</td><td>' + pos.coords.latitude + '</td></tr>' +
+       '<tr><td>Coordinates.longitude</td><td>' + pos.coords.longitude + '</td></tr>' +
+       '<tr><td>Coordinates.altitude</td><td>' + pos.coords.altitude + '</td></tr>' +
+       '<tr><td>Coordinates.accuracy</td><td>' + pos.coords.accuracy + '</td></tr>' +
+       '<tr><td>Coordinates.altitudeAccuracy</td><td>' + pos.coords.altitudeAccuracy + '</td></tr>' +
+       '<tr><td>Coordinates.heading</td><td>' + pos.coords.heading + '</td></tr>' +
+       '<tr><td>Coordinates.speed</td><td>' + pos.coords.speed + '</td></tr>' +
+       '<tr><td>timestamp</td><td>' + pos.timestamp + '</td></tr>' +
+       '</table>';
        console.log("OK");
-       console.log(JSON.stringify(pos, undefined, 2));
+       console.log(pos);
     }
 
     function ng(err) {
-       loc.textContent = JSON.stringify(err, undefined, 2);
+       loc.innerHTML = '<table>' +
+       '<tr><td>error</td><td>' + err.code + '</td></tr>' +
+       '</table>';
        console.warn("NG");
-       console.warn(JSON.stringify(err, undefined, 2));
+       console.warn(err);
     }
 </script>
 </body>
